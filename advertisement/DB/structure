@@ -1,0 +1,172 @@
+structure
+
+CREATE USER 'scm'@'%' IDENTIFIED by 'mysql'
+
+GRANT all PRIVILEGES ON `amazon-operation` .* TO 'scm'@'%'
+
+DROP USER 'scm'
+
+
+
+CREATE TABLE `advertise_term_report` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`date` time NOT NULL,
+	`currency` varchar(12) NOT NULL,
+	`portfolio` VARCHAR ( 12 ) DEFAULT NULL COMMENT '广告组合',
+	`campaign` VARCHAR ( 40 ) NOT NULL COMMENT '广告活动',
+	`group_name` VARCHAR ( 32 ) DEFAULT NULL COMMENT '广告组',
+	`target` VARCHAR ( 80 ) NOT NULL COMMENT '投放',
+	`match_type` VARCHAR ( 12 ) NOT NULL COMMENT '匹配类型',
+	`search_term` VARCHAR ( 80 ) NOT NULL COMMENT '搜索词',
+	`impressions` INT NOT NULL COMMENT '展示量',
+	`clicks` SMALLINT NOT NULL COMMENT '点击量',
+	`click_thru_rate` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '点击率',
+	`cost_per_click` FLOAT ( 4, 2 ) NOT NULL COMMENT '每次点击成本',
+	`spend` FLOAT ( 12, 4 ) DEFAULT NULL COMMENT '花费',
+	`total_sales` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '7天总销售额',
+	`acos` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '广告成本销售比',
+	`roas` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '投入产出比',
+	`total_orders` SMALLINT DEFAULT NULL COMMENT '7天总订单数',
+	`total_units` SMALLINT DEFAULT NULL COMMENT '7天总销售量',
+	`conversion_rate` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '7天的转化率',
+	`advertised_sku_units` SMALLINT DEFAULT NULL COMMENT '7天内广告SKU销售量',
+	`other_sku_units` SMALLINT DEFAULT NULL COMMENT '7天内其他SKU销售量',
+	`advertised_sku_sales` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '7天内广告SKU销售额',
+	`other_sku_sales` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '7天内其他SKU销售额',
+PRIMARY KEY ( `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+
+
+
+CREATE TABLE `advertise_product_report` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`date` time NOT NULL,
+	`portfolio` VARCHAR ( 12 ) DEFAULT NULL COMMENT '广告组合',
+	`currency` varchar(12) NOT NULL,
+	`campaign` VARCHAR ( 40 ) NOT NULL COMMENT '广告活动',
+	`group_name` VARCHAR ( 32 ) DEFAULT NULL COMMENT '广告组',
+	`advertising_sku` VARCHAR ( 32 ) DEFAULT NULL COMMENT '广告SKU',
+	`asin` VARCHAR ( 20 ) NOT NULL COMMENT '广告ASIN',
+	`impressions` INT NOT NULL COMMENT '展示量',
+	`clicks` SMALLINT NOT NULL COMMENT '点击量',
+	`click_thru_rate` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '点击率',
+	`cost_per_click` FLOAT ( 4, 2 ) NOT NULL COMMENT '每次点击成本',
+	`spend` FLOAT ( 12, 4 ) DEFAULT NULL COMMENT '花费',
+	`total_sales` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '7天总销售额',
+	`acos` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '广告成本销售比',
+	`roas` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '投入产出比',
+	`total_orders` SMALLINT DEFAULT NULL COMMENT '7天总订单数',
+	`total_units` SMALLINT DEFAULT NULL COMMENT '7天总销售量',
+	`conversion_rate` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '7天的转化率',
+	`advertised_sku_units` SMALLINT DEFAULT NULL COMMENT '7天内广告SKU销售量',
+	`other_sku_units` SMALLINT DEFAULT NULL COMMENT '7天内其他SKU销售量',
+	`advertised_sku_sales` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '7天内广告SKU销售额',
+	`other_sku_sales` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '7天内其他SKU销售额',
+PRIMARY KEY ( `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+
+
+CREATE TABLE `advertise_placement_report` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`date` time NOT NULL,
+	`portfolio` VARCHAR ( 12 ) DEFAULT NULL COMMENT '广告组合',
+	`currency` varchar(12) NOT NULL,
+	`campaign` VARCHAR ( 40 ) NOT NULL COMMENT '广告活动',
+	`bidding_strategy` VARCHAR ( 12 ) NOT NULL COMMENT '竞价策略',
+	`replacement` VARCHAR ( 20 ) NOT NULL COMMENT '位置',
+	`impressions` INT NOT NULL COMMENT '展示量',
+	`clicks` SMALLINT NOT NULL COMMENT '点击量',
+	`cost_per_click` FLOAT ( 4, 2 ) NOT NULL COMMENT '每次点击成本',
+	`spend` FLOAT ( 12, 4 ) DEFAULT NULL COMMENT '花费',
+	`total_sales` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '7天总销售额',
+	`acos` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '广告成本销售比',
+	`roas` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '投入产出比',
+	`total_orders` SMALLINT DEFAULT NULL COMMENT '7天总订单数',
+	`total_units` SMALLINT DEFAULT NULL COMMENT '7天总销售量',
+PRIMARY KEY ( `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+
+CREATE TABLE `advertise_purchase_report` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`date` time NOT NULL,
+	`portfolio` VARCHAR ( 12 ) DEFAULT NULL COMMENT '广告组合',
+	`currency` varchar(12) NOT NULL,
+	`campaign` VARCHAR ( 40 ) NOT NULL COMMENT '广告活动',
+	`group_name` VARCHAR ( 32 ) DEFAULT NULL COMMENT '广告组',
+	`advertising_sku` VARCHAR ( 32 ) DEFAULT NULL COMMENT '广告SKU',
+	`asin` VARCHAR ( 20 ) NOT NULL COMMENT '广告ASIN',
+	`target` VARCHAR ( 80 ) NOT NULL COMMENT '投放',
+	`match_type` VARCHAR ( 12 ) NOT NULL COMMENT '匹配类型',
+	`purchase_asin` VARCHAR ( 20 ) NOT NULL COMMENT '已购买的ASIN',
+	`other_sku_units` SMALLINT DEFAULT NULL COMMENT '7天内其他SKU销售量',
+	`other_sku_orders` SMALLINT DEFAULT NULL COMMENT '7天其他sku订单数',
+	`other_sku_sales` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '7天内其他SKU销售额',
+PRIMARY KEY ( `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+
+
+CREATE TABLE `advertise_term_share_report` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`date` time NOT NULL,
+	`search_term` VARCHAR ( 80 ) NOT NULL COMMENT '搜索词',
+	`impression_rank` SMALLINT NOT NULL COMMENT '展示量排名',
+	`impression_share` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '展示份额',
+	`target` VARCHAR ( 80 ) NOT NULL COMMENT '投放',
+	`match_type` VARCHAR ( 12 ) NOT NULL COMMENT '匹配类型',
+	`portfolio` VARCHAR ( 12 ) DEFAULT NULL COMMENT '广告组合',
+	`campaign` VARCHAR ( 40 ) NOT NULL COMMENT '广告活动',
+	`group_name` VARCHAR ( 32 ) DEFAULT NULL COMMENT '广告组',
+	`currency` varchar(12) NOT NULL,
+	`clicks` SMALLINT NOT NULL COMMENT '点击量',
+	`impressions` INT NOT NULL COMMENT '展示量',
+	`click_thru_rate` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '点击率',
+	`spend` FLOAT ( 12, 4 ) DEFAULT NULL COMMENT '花费',
+	`cost_per_click` FLOAT ( 4, 2 ) NOT NULL COMMENT '每次点击成本',
+	`total_orders` SMALLINT DEFAULT NULL COMMENT '7天总订单数',
+	`total_sales` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '7天总销售额',
+	`acos` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '广告成本销售比',
+	`roas` FLOAT ( 16, 4 ) DEFAULT NULL COMMENT '投入产出比',
+	`conversion_rate` FLOAT ( 7, 4 ) DEFAULT NULL COMMENT '7天的转化率',
+PRIMARY KEY ( `id` )
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+
+
+term_report
+product_report
+placement_report
+purchase_report
+term_share_report
+
+term_report
+	7天总销售额	7天总订单数(#)	7天总销售量(#)	7天的转化率	7天内广告SKU销售量(#)	7天内其他SKU销售量(#)	7天内广告SKU销售额	7天内其他SKU销售额
+
+date
+portfolio 广告组
+campaign
+group_name
+target
+match_type
+search_term
+impressions
+clicks
+click_thru_rate
+cost_per_click
+spend
+total_sales (7 Day )
+Total_advertising Cost of Sales (ACoS) 
+Total Return on Advertising Spend (RoAS)
+total_orders (7 Day )
+total_units (7 Day )
+conversion_rate (7 Day )
+advertised_sku_units (7 Day )
+other_sku_units (7 Day )
+advertised_sku_sales (7 Day )
+other_sku_sales (7 Day )
+
+
+
